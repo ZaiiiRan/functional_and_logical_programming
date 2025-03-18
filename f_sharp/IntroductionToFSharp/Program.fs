@@ -20,12 +20,20 @@ let cylinderVolume r h = (circleArea r) * h
 let multiplyAreaH area h = area * h
 let cylinderVolumeSuperPosition = (circleArea >> multiplyAreaH)
 
+let rec sumDigitsUp num =
+    if num = 0 then 0
+    else
+        let sum = sumDigitsUp (num/10)
+        let lastDigit = num%10
+        sum + lastDigit
+
 [<EntryPoint>]
 let main (argv :string[]) =
     printfn "Hello World"
     Console.WriteLine("Hello World")
 
     Console.WriteLine("---------------------")
+    Console.WriteLine("Решение квадратного уравнения")
 
     let res = solve 1.0 2.0 -3.0
     match res with
@@ -34,6 +42,7 @@ let main (argv :string[]) =
         | Quadratic(x1, x2) -> printfn "Квадратное уравнение: x1=%f x2=%f" x1 x2
 
     Console.WriteLine("---------------------")
+    Console.WriteLine("Объем цилиндра (каррирование)")
 
     Console.WriteLine("Введите радиус:")
     let r = System.Console.ReadLine() |> float
@@ -44,6 +53,7 @@ let main (argv :string[]) =
     printfn "Объем цилиндра: %f" volume
 
     Console.WriteLine("---------------------")
+    Console.WriteLine("Объем цилиндра (суперпозиция)")
 
     Console.WriteLine("Введите радиус:")
     let r2 = System.Console.ReadLine() |> float
@@ -54,6 +64,14 @@ let main (argv :string[]) =
     printfn "Объем цилиндра: %f" volume2
 
     Console.WriteLine("---------------------")
+    Console.WriteLine("Сумма цифр числа (рекурсия вверх)")
 
+    Console.Write("Введите число: ")
+    let number = Console.ReadLine() |> int
+
+    let sum = sumDigitsUp number
+    printfn "Сумма цифр числа равна %d" sum
+
+    Console.WriteLine("---------------------")
 
     0
