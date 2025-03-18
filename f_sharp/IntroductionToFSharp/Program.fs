@@ -22,10 +22,13 @@ let cylinderVolumeSuperPosition = (circleArea >> multiplyAreaH)
 
 let rec sumDigitsUp num =
     if num = 0 then 0
-    else
-        let sum = sumDigitsUp (num/10)
-        let lastDigit = num%10
-        sum + lastDigit
+    else (num%10) + (sumDigitsUp (num/10))
+
+let sumDigitsDown num =
+    let rec sumDigitsDownLoop num current =
+        if num=0 then current
+        else sumDigitsDownLoop (num/10) (current+(num%10))
+    sumDigitsDownLoop num 0
 
 [<EntryPoint>]
 let main (argv :string[]) =
@@ -73,5 +76,12 @@ let main (argv :string[]) =
     printfn "Сумма цифр числа равна %d" sum
 
     Console.WriteLine("---------------------")
+    Console.WriteLine("Сумма цифр числа (рекурсия вниз)")
+
+    Console.Write("Введите число: ")
+    let number2 = Console.ReadLine() |> int
+
+    let sum2 = sumDigitsDown number2
+    printfn "Сумма цифр числа равна %d" sum2
 
     0
