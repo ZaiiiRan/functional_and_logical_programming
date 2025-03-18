@@ -1,2 +1,7 @@
-﻿// For more information see https://aka.ms/fsharp-console-apps
-printfn "Hello from F#"
+﻿open System
+
+[<EntryPoint>]
+let main (argv :string[]) =
+    printfn "Hello World"
+    Console.WriteLine("Hello World")
+    0
