@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-  <Compile Include="FavouriteProgrammingLanguage.fs" />
+    <Compile Include="FavouriteProgrammingLanguage.fs" />
+    <Compile Include="CoprimeTraversal.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
