@@ -12,6 +12,7 @@ let askAboutFavouriteLangCarry () =
     let func read transform write = write (transform (read ())) 
     func Console.ReadLine favouriteProgrammingLanguage Console.WriteLine
 
+
 let testCoprimeTraversal () =
     let number = 15
     
@@ -48,7 +49,28 @@ let testCoprimeTraversalPredicate () =
     Console.WriteLine(sum)
 
 
+let TaskSelection task number =
+    match task with
+    | 1 -> maxPrimeDivisor number
+    | 2 -> productOfDigitsNotDivisibleBy5 number
+    | 3 -> gcdOfMaxOddNonPrimeDivisorAndDigitProduct number
+    | _ -> 
+        Console.WriteLine("Неверный номер функции")
+        0
+
+let workingWithNumbers () = 
+    Console.WriteLine("Введите номер функции и аргумент:
+    1 - Максимальный простой делитель числа
+    2 - Произведение цифр числа, не делящихся на 5
+    3 - НОД максимального нечетного непростого делителя числа и произведения цифр данного числа")
+    let args = (Console.ReadLine() |> Int32.Parse, Console.ReadLine() |> Int32.Parse)
+    let task = fst args
+    let number = snd args
+    
+    let result = TaskSelection task number
+    Console.WriteLine(result)
+
 [<EntryPoint>]
 let main argv =
-    Console.WriteLine(gcdOfMaxOddNonPrimeDivisorAndDigitProduct 49)
+    workingWithNumbers ()
     0
