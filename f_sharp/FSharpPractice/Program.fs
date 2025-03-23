@@ -1,12 +1,17 @@
 ﻿open System
 open FavouriteProgrammingLanguage
 
-let askAboutFavouriteLang () = 
+let askAboutFavouriteLangSuperpos () = 
     Console.WriteLine("Какой у вас любимый язык программирования?")
-    let answer = Console.ReadLine()
-    Console.WriteLine(favouriteProgrammingLanguage answer)
+    (Console.ReadLine>>favouriteProgrammingLanguage>>Console.WriteLine)()
+
+let askAboutFavouriteLangCarry () =
+    Console.WriteLine("Какой у вас любимый язык программирования?")
+    let func read transform write = write (transform (read ())) 
+    func Console.ReadLine favouriteProgrammingLanguage Console.WriteLine
 
 [<EntryPoint>]
 let main argv =
-    askAboutFavouriteLang ()
+    askAboutFavouriteLangSuperpos ()
+    askAboutFavouriteLangCarry ()
     0

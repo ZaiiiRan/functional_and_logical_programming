@@ -1,7 +1,7 @@
 module FavouriteProgrammingLanguage
 open System
 
-let favouriteProgrammingLanguage lang =
+let favouriteProgrammingLanguage (lang :string) =
     match lang with
     | "F#" | "Prologue" -> Console.WriteLine("Подлиза")
     | "Go" -> Console.WriteLine("Мое уважение")
