@@ -12,3 +12,6 @@ let coprimeTraversal number (func :int->int->int) initial =
             let newAcc = if gcd number candidate = 1 then (func acc candidate) else acc
             traversal number func newAcc (candidate-1)
     traversal number func initial number
+
+let eulerFunction number =
+    coprimeTraversal number (fun x y -> x + 1) 0

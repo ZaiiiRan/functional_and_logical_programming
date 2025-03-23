@@ -34,7 +34,13 @@ let testCoprimeTraversal () =
     let max = coprimeTraversal number (fun x y -> if x > y then x else y) 0
     Console.WriteLine(max)
 
+let testEulerFunction () =
+    let number = 15
+    Console.WriteLine("Функция Эйлера от {0}", number)
+    Console.WriteLine(eulerFunction number)
+
+
 [<EntryPoint>]
 let main argv =
-    testCoprimeTraversal ()
+    testEulerFunction ()
     0
