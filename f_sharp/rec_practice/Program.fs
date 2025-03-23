@@ -1,7 +1,7 @@
 ﻿open System
 open NumberTraversal
 
-let testNumberTraversal = 
+let testNumberTraversal () = 
     Console.WriteLine("Сумма цифр числа 912:")
     let digitSum = numberTraversal 912 (fun x y -> (x+y)) 0
     Console.WriteLine(digitSum)
@@ -24,5 +24,6 @@ let testNumberTraversal =
 
 [<EntryPoint>]
 let main (argv :string[]) = 
-    testNumberTraversal
+    let evenSum =  numberTraversalPredicate 8123 (fun x y -> (x+y)) 0 (fun x -> (x%2)=0)
+    Console.WriteLine(evenSum)
     0
