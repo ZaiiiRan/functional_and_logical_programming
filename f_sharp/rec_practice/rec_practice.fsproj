@@ -6,6 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Fibonacci.fs" />
+    <Compile Include="Task6.fs" />
+    <Compile Include="NumberTraversal.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
