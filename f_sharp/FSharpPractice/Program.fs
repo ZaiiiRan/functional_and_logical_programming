@@ -1,6 +1,7 @@
 ﻿open System
 open FavouriteProgrammingLanguage
 open CoprimeTraversal
+open WorkingWithNumbers
 
 let askAboutFavouriteLangSuperpos () = 
     Console.WriteLine("Какой у вас любимый язык программирования?")
@@ -49,5 +50,5 @@ let testCoprimeTraversalPredicate () =
 
 [<EntryPoint>]
 let main argv =
-    testCoprimeTraversalPredicate ()
+    Console.WriteLine(maxPrimeDivisor 26)
     0
