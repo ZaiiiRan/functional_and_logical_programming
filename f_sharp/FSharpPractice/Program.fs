@@ -50,5 +50,5 @@ let testCoprimeTraversalPredicate () =
 
 [<EntryPoint>]
 let main argv =
-    Console.WriteLine(productOfDigitsNotDivisibleBy5 2535)
+    Console.WriteLine(gcdOfMaxOddNonPrimeDivisorAndDigitProduct 49)
     0
