@@ -22,8 +22,21 @@ let testNumberTraversal () =
     let digitCount = numberTraversal 912 (fun x y -> (x+1)) 0
     Console.WriteLine(digitCount)
 
-[<EntryPoint>]
-let main (argv :string[]) = 
+let testNumberTraversalPredicate () =
+    Console.WriteLine("Сумма четных цифр числа 8123:")
     let evenSum =  numberTraversalPredicate 8123 (fun x y -> (x+y)) 0 (fun x -> (x%2)=0)
     Console.WriteLine(evenSum)
+
+    Console.WriteLine("Максимум среди нечетных цифр числа 8123:")
+    let oddMax =  numberTraversalPredicate 8123 (fun x y -> if x > y then x else y) 0 (fun x -> (x%2)>0)
+    Console.WriteLine(oddMax)
+
+    Console.WriteLine("Количество единиц в числе 8123:")
+    let count1 = numberTraversalPredicate 8123 (fun x y -> (x+1)) 0 (fun x -> x=1)
+    Console.WriteLine(count1)
+
+
+[<EntryPoint>]
+let main (argv :string[]) = 
+    testNumberTraversalPredicate ()
     0
