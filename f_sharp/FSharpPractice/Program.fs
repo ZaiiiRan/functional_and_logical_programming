@@ -39,8 +39,15 @@ let testEulerFunction () =
     Console.WriteLine("Функция Эйлера от {0}", number)
     Console.WriteLine(eulerFunction number)
 
+let testCoprimeTraversalPredicate () =
+    let number = 15
+
+    Console.WriteLine("Сумма четных взаимнопростых чисел с числом {0}", number)
+    let sum = coprimeTraversalPredicate number (+) (fun x -> (x%2)=0) 0
+    Console.WriteLine(sum)
+
 
 [<EntryPoint>]
 let main argv =
-    testEulerFunction ()
+    testCoprimeTraversalPredicate ()
     0
