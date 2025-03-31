@@ -80,6 +80,11 @@ let frequencyElement list =
     let index = pos fL maxFreq
     getIn list index
 
+let countSquares list =
+    list
+    |> List.filter (fun x -> List.exists (fun y -> y * y = x) list)
+    |> List.length
+
 [<EntryPoint>]
 let main (argv :string[]) =
     Console.WriteLine("Введите число n:")
@@ -102,5 +107,9 @@ let main (argv :string[]) =
 
     Console.WriteLine("Самый часто встречающийся элемент:")
     Console.WriteLine(frequencyElement list)
+
+    Console.WriteLine("Сколько элементов могут быть квадратом какого-то из элементов списка:")
+    let list2 = [1; 2; 3; 4; 9; 16]
+    Console.WriteLine(countSquares list2)
 
     0
