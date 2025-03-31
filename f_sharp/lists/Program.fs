@@ -34,6 +34,9 @@ let oddCount list =
 let minList list =
     reduceList list (fun x y -> if x < y then x else y) (fun x -> true) System.Int32.MaxValue
 
+let maxList list =
+    reduceList list (fun x y -> if x > y then x else y) (fun x -> true) System.Int32.MinValue
+
 let rec freqElement list element count =
     match list with
     | [] -> count
@@ -48,6 +51,34 @@ let rec freqList list mainList currentList =
     | head :: tail -> 
         let freqEl = freqElement mainList head 0
         freqList tail mainList (currentList @ [freqEl])
+
+let pos list el = 
+    let rec pos1 list el num = 
+        match list with
+            |[] -> 0
+            |h::t ->    
+                if (h = el) then num
+                else 
+                    let num1 = num + 1
+                    pos1 t el num1
+    pos1 list el 1
+
+let getIn list pos = 
+    let rec getIn1 list num curNum = 
+        match list with 
+            |[] -> 0
+            |h::t -> 
+                if num = curNum then h
+                else 
+                    let newNum = curNum + 1
+                    getIn1 t num newNum
+    getIn1 list pos 1
+
+let frequencyElement list = 
+    let fL = freqList list list []
+    let maxFreq = maxList fL
+    let index = pos fL maxFreq
+    getIn list index
 
 [<EntryPoint>]
 let main (argv :string[]) =
@@ -68,5 +99,8 @@ let main (argv :string[]) =
 
     Console.WriteLine("Минимум списка:")
     Console.WriteLine(minList list)
+
+    Console.WriteLine("Самый часто встречающийся элемент:")
+    Console.WriteLine(frequencyElement list)
 
     0
