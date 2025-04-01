@@ -6,6 +6,7 @@ open CreateTuplesTask
 open SortStringsTask
 open TasksWithList
 open Task17
+open Task18
 
 let readChurchList () =
     Console.WriteLine("Введите число n:")
@@ -162,6 +163,6 @@ let testSquaresOfFrequentElementsList () =
 
 [<EntryPoint>]
 let main (argv :string[]) =
-    Task17.task17
+    Task18.task18
 
     0
