@@ -1,4 +1,5 @@
 ﻿open System
+open BTree
 
 let readList n =
     let rec readListRec n acc =
@@ -152,5 +153,9 @@ let main (argv :string[]) =
     let stringList = readStrings()
     let sortedStrings = sortByLength stringList
     Console.WriteLine(sortedStrings)
+
+    let tree = Node("1", Node("2", Nil, Nil), Node("3", Nil, Nil))
+
+    traverse prefix tree
 
     0
