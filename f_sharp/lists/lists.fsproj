@@ -6,7 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="btree.fs" />
+    <Compile Include="ChurchList.fs" />
+    <Compile Include="CountSquaresInList.fs" />
+    <Compile Include="CreateTuplesTask.fs" />
+    <Compile Include="SortStringsTask.fs" />
+    <Compile Include="BTree.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
