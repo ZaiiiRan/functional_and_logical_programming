@@ -1,6 +1,38 @@
 module TasksWithList
 open ChurchList
 
+// 1.9 Нахождение элементов, расположенных перед последним минимальным
+let elementsBeforeLastMin list =
+    let rec findLastMinIndex lst currentIdx lastMinIdx currentMin =
+        match lst with
+        | [] -> lastMinIdx
+        | head :: tail ->
+            if head <= currentMin then
+                findLastMinIndex tail (currentIdx + 1) currentIdx head
+            else
+                findLastMinIndex tail (currentIdx + 1) lastMinIdx currentMin
+
+    let rec takeElements lst count acc =
+        match lst with
+        | [] -> List.rev acc
+        | head :: tail ->
+            if count > 0 then
+                takeElements tail (count - 1) (head :: acc)
+            else
+                List.rev acc
+
+    if List.isEmpty list then
+        []
+    else
+        let minVal = List.min list
+        let lastIdx = findLastMinIndex list 0 0 minVal
+        takeElements list lastIdx []
+
+let elementsBeforeLastMinList list =
+    let minVal = List.min list
+    let lastMinIndex = List.findIndexBack (fun x -> x = minVal) list
+    list |> List.take lastMinIndex
+
 // 1.19 Циклический сдвиг вправо
 let shiftRight list =
     match list with

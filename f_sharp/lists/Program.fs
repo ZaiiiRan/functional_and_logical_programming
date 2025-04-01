@@ -66,9 +66,25 @@ let testSortStrings () =
     let sortedStrings = sortByLength stringList
     Console.WriteLine("Отсортированные строки:\n{0}", String.Join("\n", sortedStrings))
 
+// 11
+let testElementsBeforeLastMin () =
+    let list = [3; 5; 1; 8; 7]
+    ChurchList.printList list
+
+    let result = TasksWithList.elementsBeforeLastMin list
+    Console.WriteLine("Элементы, расположенные перед последним минимальным:")
+    ChurchList.printList result
+
+let testElementsBeforeLastMinList () =
+    let list = [3; 5; 1; 8; 7]
+    Console.WriteLine("Список: {0}", String.Join("; ", list))
+
+    let result = TasksWithList.elementsBeforeLastMinList list
+    Console.WriteLine("Элементы, расположенные перед последним минимальным: {0}", String.Join("; ", result))
+
 // 12
 let testShiftRight () =
-    let list = [1; 5; 3; 8; 7]
+    let list = [3; 5; 1; 8; 7]
     ChurchList.printList list
 
     let shiftedChurchList = TasksWithList.shiftRight list
@@ -145,6 +161,6 @@ let testSquaresOfFrequentElementsList () =
 
 [<EntryPoint>]
 let main (argv :string[]) =
-    testSquaresOfFrequentElements ()
+    testElementsBeforeLastMinList ()
 
     0
