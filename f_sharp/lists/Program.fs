@@ -102,6 +102,18 @@ let createTuples listA listB listC =
     
     List.zip3 sortedA sortedB sortedC
 
+let sortByLength (strings: string list) =
+    strings |> List.sortBy String.length
+
+let readStrings () =
+    printfn "Введите строки (пустая строка для завершения):"
+    let rec read acc =
+        let input = Console.ReadLine()
+        if input = "" then List.rev acc
+        else read (input :: acc)
+    read []
+
+
 [<EntryPoint>]
 let main (argv :string[]) =
     Console.WriteLine("Введите число n:")
@@ -136,5 +148,9 @@ let main (argv :string[]) =
     let result = createTuples listA listB listC
 
     Console.WriteLine(result)
+
+    let stringList = readStrings()
+    let sortedStrings = sortByLength stringList
+    Console.WriteLine(sortedStrings)
 
     0
