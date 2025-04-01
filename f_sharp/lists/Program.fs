@@ -93,13 +93,27 @@ let testEvenThenOdd () =
 let testEvenThenOddList () =
     let list = [1; 2; 3; 4; 5]
     Console.WriteLine("Список: {0}", String.Join("; ", list))
-    
+
     let result = TasksWithList.evenThenOddList list
     Console.WriteLine("Элементы сначала с четным индексом, затем с нечетным: {0}", String.Join("; ", result))
+
+let testUniquePrimeDivisors () =
+    let list = readChurchList ()
+    
+    let result = TasksWithList.uniquePrimeDivisors list
+    Console.WriteLine("Уникальные простые делители элементов списка:")
+    ChurchList.printList result
+
+let testUniquePrimeDivisorsList () =
+    let list = [6; 8; 12; 22; 23]
+    Console.WriteLine("Список: {0}", String.Join("; ", list))
+
+    let result = TasksWithList.uniquePrimeDivisorsList list
+    Console.WriteLine("Уникальные простые делители элементов списка: {0}", String.Join("; ", result))
 
 
 [<EntryPoint>]
 let main (argv :string[]) =
-    testEvenThenOddList ()
+    testUniquePrimeDivisorsList ()
 
     0
