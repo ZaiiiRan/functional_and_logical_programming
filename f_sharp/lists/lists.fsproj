@@ -11,6 +11,7 @@
     <Compile Include="CreateTuplesTask.fs" />
     <Compile Include="SortStringsTask.fs" />
     <Compile Include="TasksWithList.fs" />
+    <Compile Include="Task17.fs" />
     <Compile Include="BTree.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
