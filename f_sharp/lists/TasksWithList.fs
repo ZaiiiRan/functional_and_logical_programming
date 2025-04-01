@@ -36,3 +36,22 @@ let containsMaxInRange list a b =
 let containsMaxInRangeList list a b =
     let maxEl = List.max list
     list |> List.exists (fun x -> x = maxEl && x >= a && x <= b)
+
+// 1.39 Вывести сначала элементы с четными индексами, затем с нечетными
+let evenThenOdd list =
+    let rec splitEvenOdd list index evens odds =
+        match list with
+        | [] -> (evens, odds)
+        | head :: tail ->
+            if index % 2 = 0 then
+                splitEvenOdd tail (index + 1) (evens @ [head]) odds
+            else
+                splitEvenOdd tail (index + 1) evens (odds @ [head])
+
+    let evens, odds = splitEvenOdd list 0 [] []
+    evens @ odds
+
+let evenThenOddList list =
+    let evens = list |> List.mapi (fun i x -> if i % 2 = 0 then Some x else None) |> List.choose id
+    let odds = list |> List.mapi (fun i x -> if i % 2 <> 0 then Some x else None) |> List.choose id
+    evens @ odds

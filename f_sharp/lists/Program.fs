@@ -83,8 +83,23 @@ let testcontainsMaxInRangeList () =
     let list = [1; 5; 3; 8; 7]
     Console.WriteLine("Результат: {0}", TasksWithList.containsMaxInRangeList list 3 8)
 
+let testEvenThenOdd () =
+    let chList = readChurchList()
+
+    let result = TasksWithList.evenThenOdd chList
+    Console.WriteLine("Элементы сначала с четным индексом, затем с нечетным:")
+    ChurchList.printList result
+
+let testEvenThenOddList () =
+    let list = [1; 2; 3; 4; 5]
+    Console.WriteLine("Список: {0}", String.Join("; ", list))
+    
+    let result = TasksWithList.evenThenOddList list
+    Console.WriteLine("Элементы сначала с четным индексом, затем с нечетным: {0}", String.Join("; ", result))
+
+
 [<EntryPoint>]
 let main (argv :string[]) =
-    testcontainsMaxInRangeList ()
+    testEvenThenOddList ()
 
     0
