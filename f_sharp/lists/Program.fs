@@ -75,8 +75,16 @@ let testShiftRightList () =
     let shiftedList = TasksWithList.shiftRightList list
     Console.WriteLine("Список со сдвигом: {0}", String.Join("; ",shiftedList))
 
+let testcontainsMaxInRange () =
+    let chList = readChurchList()
+    Console.WriteLine("Результат: {0}", TasksWithList.containsMaxInRange chList 3 8)
+
+let testcontainsMaxInRangeList () =
+    let list = [1; 5; 3; 8; 7]
+    Console.WriteLine("Результат: {0}", TasksWithList.containsMaxInRangeList list 3 8)
+
 [<EntryPoint>]
 let main (argv :string[]) =
-    testShiftRightList ()
+    testcontainsMaxInRangeList ()
 
     0
