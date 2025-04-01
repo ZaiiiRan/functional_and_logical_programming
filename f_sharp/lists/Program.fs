@@ -6,6 +6,23 @@ open CreateTuplesTask
 open SortStringsTask
 open TasksWithList
 
+let readChurchList () =
+    Console.WriteLine("Введите число n:")
+    let n = System.Console.ReadLine() |> int
+
+    Console.WriteLine("Ввод элементов:")
+    let list = ChurchList.readList n
+
+    Console.WriteLine("Список:")
+    ChurchList.printList list
+    list
+
+// 6
+let testBTree () =
+    let tree = BTree.Node("1", BTree.Node("2", Nil, Nil), BTree.Node("3", Nil, Nil))
+    BTree.traverse BTree.prefix tree
+
+// 1-5, 7
 let testChurchList () =
     Console.WriteLine("Введите число n:")
     let n = System.Console.ReadLine() |> int
@@ -21,11 +38,13 @@ let testChurchList () =
     Console.WriteLine("Минимум списка: {0}", ChurchList.minList list)
     Console.WriteLine("Самый часто встречающийся элемент: {0}", ChurchList.frequencyElement list)
 
+// 8
 let testCountSquares () = 
     let list = [1; 2; 3; 4; 9; 16]
     Console.WriteLine("Список: {0}", String.Join("; ", list))
     Console.WriteLine("Сколько элементов могут быть квадратом какого-то из элементов списка: {0}", CountSquaresInList.countSquares list)
 
+// 9
 let testCreateTuples () =
     let listA = [5; 3; 8; 1]
     let listB = [12; 3; 25; 40]
@@ -39,6 +58,7 @@ let testCreateTuples () =
 
     Console.WriteLine("Результат: {0}", String.Join("; ", result))
 
+// 10
 let testSortStrings () =
     Console.WriteLine("Введите строки (пустая строка для завершения):")
     let stringList = SortStringsTask.readStrings
@@ -46,25 +66,12 @@ let testSortStrings () =
     let sortedStrings = sortByLength stringList
     Console.WriteLine("Отсортированные строки:\n{0}", String.Join("\n", sortedStrings))
 
-let testBTree () =
-    let tree = BTree.Node("1", BTree.Node("2", Nil, Nil), BTree.Node("3", Nil, Nil))
-    BTree.traverse BTree.prefix tree
-
-let readChurchList () =
-    Console.WriteLine("Введите число n:")
-    let n = System.Console.ReadLine() |> int
-
-    Console.WriteLine("Ввод элементов:")
-    let list = ChurchList.readList n
-
-    Console.WriteLine("Список:")
-    ChurchList.printList list
-    list
-
+// 12
 let testShiftRight () =
-    let chList = readChurchList()
+    let list = [1; 5; 3; 8; 7]
+    ChurchList.printList list
 
-    let shiftedChurchList = TasksWithList.shiftRight chList
+    let shiftedChurchList = TasksWithList.shiftRight list
     Console.WriteLine("Список Черча (со сдвигом):")
     ChurchList.printList shiftedChurchList
 
@@ -75,18 +82,23 @@ let testShiftRightList () =
     let shiftedList = TasksWithList.shiftRightList list
     Console.WriteLine("Список со сдвигом: {0}", String.Join("; ",shiftedList))
 
+// 13
 let testcontainsMaxInRange () =
-    let chList = readChurchList()
-    Console.WriteLine("Результат: {0}", TasksWithList.containsMaxInRange chList 3 8)
+    let list = [1; 5; 3; 8; 7]
+    ChurchList.printList list
+
+    Console.WriteLine("Результат: {0}", TasksWithList.containsMaxInRange list 3 8)
 
 let testcontainsMaxInRangeList () =
     let list = [1; 5; 3; 8; 7]
     Console.WriteLine("Результат: {0}", TasksWithList.containsMaxInRangeList list 3 8)
 
+// 14
 let testEvenThenOdd () =
-    let chList = readChurchList()
+    let list = [1; 2; 3; 4; 5]
+    ChurchList.printList list
 
-    let result = TasksWithList.evenThenOdd chList
+    let result = TasksWithList.evenThenOdd list
     Console.WriteLine("Элементы сначала с четным индексом, затем с нечетным:")
     ChurchList.printList result
 
@@ -97,8 +109,10 @@ let testEvenThenOddList () =
     let result = TasksWithList.evenThenOddList list
     Console.WriteLine("Элементы сначала с четным индексом, затем с нечетным: {0}", String.Join("; ", result))
 
+// 15
 let testUniquePrimeDivisors () =
-    let list = readChurchList ()
+    let list = [6; 8; 12; 22; 23]
+    ChurchList.printList list
     
     let result = TasksWithList.uniquePrimeDivisors list
     Console.WriteLine("Уникальные простые делители элементов списка:")
@@ -111,6 +125,7 @@ let testUniquePrimeDivisorsList () =
     let result = TasksWithList.uniquePrimeDivisorsList list
     Console.WriteLine("Уникальные простые делители элементов списка: {0}", String.Join("; ", result))
 
+// 16
 let testSquaresOfFrequentElements () =
     let list = [6; 6; 12; 6; 23; 12; 45; 12]
     Console.WriteLine("Список:")
@@ -127,7 +142,6 @@ let testSquaresOfFrequentElementsList () =
 
     let squares = TasksWithList.squaresOfFrequentElementsList list
     Console.WriteLine("Список квадратов неотрицательных чисел < 100, встречающихся > 2 раз: {0}", String.Join("; ", squares))
-
 
 [<EntryPoint>]
 let main (argv :string[]) =
