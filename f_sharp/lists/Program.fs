@@ -85,6 +85,23 @@ let countSquares list =
     |> List.filter (fun x -> List.exists (fun y -> y * y = x) list)
     |> List.length
 
+let sumOfDigits n =
+    n |> abs |> string |> Seq.sumBy (fun c -> int c - int '0')
+
+let countDivisors n =
+    let absN = abs n
+    [1..absN] |> List.filter (fun x -> absN % x = 0) |> List.length
+
+let customSort list keyFunc reverse =
+    list |> List.sortBy (fun x -> keyFunc x, if reverse then -abs x else abs x)
+
+let createTuples listA listB listC =
+    let sortedA = List.sortDescending listA
+    let sortedB = customSort listB sumOfDigits false
+    let sortedC = customSort listC countDivisors true
+    
+    List.zip3 sortedA sortedB sortedC
+
 [<EntryPoint>]
 let main (argv :string[]) =
     Console.WriteLine("Введите число n:")
@@ -111,5 +128,13 @@ let main (argv :string[]) =
     Console.WriteLine("Сколько элементов могут быть квадратом какого-то из элементов списка:")
     let list2 = [1; 2; 3; 4; 9; 16]
     Console.WriteLine(countSquares list2)
+
+    let listA = [5; 3; 8; 1]
+    let listB = [12; 3; 25; 40]
+    let listC = [6; 15; 28; 10]
+
+    let result = createTuples listA listB listC
+
+    Console.WriteLine(result)
 
     0
