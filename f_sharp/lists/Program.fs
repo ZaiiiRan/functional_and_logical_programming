@@ -111,9 +111,26 @@ let testUniquePrimeDivisorsList () =
     let result = TasksWithList.uniquePrimeDivisorsList list
     Console.WriteLine("Уникальные простые делители элементов списка: {0}", String.Join("; ", result))
 
+let testSquaresOfFrequentElements () =
+    let list = [6; 6; 12; 6; 23; 12; 45; 12]
+    Console.WriteLine("Список:")
+    ChurchList.printList list
+
+    let squares = TasksWithList.squaresOfFrequentElements list
+
+    Console.WriteLine("Список квадратов неотрицательных чисел < 100, встречающихся > 2 раз:")
+    ChurchList.printList squares
+
+let testSquaresOfFrequentElementsList () =
+    let list = [6; 6; 12; 6; 23; 12; 45; 12]
+    Console.WriteLine("Список: {0}", String.Join("; ", list))
+
+    let squares = TasksWithList.squaresOfFrequentElementsList list
+    Console.WriteLine("Список квадратов неотрицательных чисел < 100, встречающихся > 2 раз: {0}", String.Join("; ", squares))
+
 
 [<EntryPoint>]
 let main (argv :string[]) =
-    testUniquePrimeDivisorsList ()
+    testSquaresOfFrequentElements ()
 
     0

@@ -105,3 +105,49 @@ let uniquePrimeDivisorsList list =
         [2..n] |> List.filter (fun x -> n % x = 0 && isPrimeList x)
     
     list |> List.collect primeDivisorsList |> Set.ofList |> Set.toList
+
+// 1.59 Построить список квадратов неотрицательных чисел < 100, встречающихся > 2 раз
+let squaresOfFrequentElements list =
+    let rec countOccurrences elem list count =
+        match list with
+        | [] -> count
+        | head :: tail ->
+            if head = elem then
+                countOccurrences elem tail (count + 1)
+            else
+                countOccurrences elem tail count
+
+    let rec countAllElements list counted =
+        match list with
+        | [] -> counted
+        | head :: tail ->
+            if List.exists (fun (x, _) -> x = head) counted then
+                countAllElements tail counted
+            else
+                let count = countOccurrences head list 0
+                countAllElements tail (counted @ [(head, count)])
+
+    let rec filterFrequent list filtered =
+        match list with
+        | [] -> filtered
+        | (x, count) :: tail ->
+            if x >= 0 && x < 100 && count > 2 then
+                filterFrequent tail (filtered @ [x])
+            else
+                filterFrequent tail filtered
+
+    let rec squareElements list squared =
+        match list with
+        | [] -> squared
+        | head :: tail ->
+            squareElements tail (squared @ [head * head])
+
+    let counted = countAllElements list []
+    let frequent = filterFrequent counted []
+    squareElements frequent []
+
+let squaresOfFrequentElementsList list =
+    list
+    |> List.countBy id
+    |> List.filter (fun (x, count) -> x >= 0 && x < 100 && count > 2)
+    |> List.map (fun (x, _) -> x * x)
