@@ -13,6 +13,7 @@
     <Compile Include="TasksWithList.fs" />
     <Compile Include="Task17.fs" />
     <Compile Include="Task18.fs" />
+    <Compile Include="Strings.fs" />
     <Compile Include="BTree.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

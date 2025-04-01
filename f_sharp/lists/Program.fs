@@ -7,6 +7,7 @@ open SortStringsTask
 open TasksWithList
 open Task17
 open Task18
+open Strings
 
 let readChurchList () =
     Console.WriteLine("Введите число n:")
@@ -161,8 +162,29 @@ let testSquaresOfFrequentElementsList () =
     let squares = TasksWithList.squaresOfFrequentElementsList list
     Console.WriteLine("Список квадратов неотрицательных чисел < 100, встречающихся > 2 раз: {0}", String.Join("; ", squares))
 
+let testPalindrome () =
+    let str1 = "aabbaa"
+    let str2 = "fjgd"
+
+    Console.WriteLine("{0}: {1}", str1, Strings.isLatinLettersPalindrome str1)
+    Console.WriteLine("{0}: {1}", str2, Strings.isLatinLettersPalindrome str2)
+
+let testSortStringsByDeviation () =
+    let testStrings = [
+        "abcba"
+        "hello"
+        "abcdef"
+        "a"
+        ""
+    ]
+
+    let sorted = sortStrings testStrings
+    Console.WriteLine("Отсортированные строки:")
+    sorted |> List.iter (printfn "%s")
+
+
 [<EntryPoint>]
 let main (argv :string[]) =
-    Task18.task18
+    testSortStringsByDeviation ()
 
     0
