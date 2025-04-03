@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="GeometricFigure.fs" />
+    <Compile Include="IPrint.fs" />
+    <Compile Include="Rectangle.fs" />
+    <Compile Include="Square.fs" />
+    <Compile Include="Circle.fs" />
+    <Compile Include="GeometricFigureDU.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+</Project>
