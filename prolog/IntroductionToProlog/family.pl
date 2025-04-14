@@ -70,3 +70,14 @@ father(X) :-
     father(Y, X),
     write(Y),
     nl.
+
+sister(X, Y) :-
+    woman(X),
+    parent(P1, X), parent(P1, Y),
+    parent(P2, X), parent(P2, Y),
+    X \= Y.
+
+sister(X) :-
+    sister(Y, X),
+    write(Y),
+    nl.
