@@ -37,7 +37,8 @@ mother(X, Y) :-
 mother_of(X) :-
     dite(X, Mother), 
     woman(Mother),
-    write(Mother).
+    write(Mother),
+    nl, fail.
 
 parent(X, Y) :-
     dite(Y, X).
@@ -51,7 +52,7 @@ brother(X, Y) :-
 brothers(X) :-
     brother(Y, X), 
     write(Y), 
-    nl.
+    nl, fail.
 
 b_s(X, Y) :-
     parent(P1, X), parent(P1, Y),
@@ -61,7 +62,7 @@ b_s(X, Y) :-
 b_s(X) :-
     b_s(X, Y),
     write(Y),
-    nl.
+    nl, fail.
 
 father(X, Y) :-
     man(X), parent(X, Y).
@@ -69,7 +70,7 @@ father(X, Y) :-
 father(X) :-
     father(Y, X),
     write(Y),
-    nl.
+    nl, fail.
 
 sister(X, Y) :-
     woman(X),
@@ -80,4 +81,4 @@ sister(X, Y) :-
 sister(X) :-
     sister(Y, X),
     write(Y),
-    nl.
+    nl, fail.
