@@ -52,3 +52,13 @@ brothers(X) :-
     brother(Y, X), 
     write(Y), 
     nl.
+
+b_s(X, Y) :-
+    parent(P1, X), parent(P1, Y),
+    parent(P2, X), parent(P2, Y),
+    X \= Y.
+
+b_s(X) :-
+    b_s(X, Y),
+    write(Y),
+    nl.
