@@ -32,13 +32,23 @@ children(X, Y, Z) :-
     dite(Z, Y).
 
 mother(X, Y) :-
-    dite(Y, X),woman(X).
+    dite(Y, X), woman(X).
 
-mother_of(X, Mother) :-
-    dite(X, Mother),woman(Mother).
+mother_of(X) :-
+    dite(X, Mother), 
+    woman(Mother),
+    write(Mother).
+
+parent(X, Y) :-
+    dite(Y, X).
 
 brother(X, Y) :-
-    man(X),X\=Y,dite(X, Parent),dite(Y, Parent).
+    man(X), 
+    parent(P1, X), parent(P1, Y),
+    parent(P2, X), parent(P2, Y),
+    X \= Y.
 
-brothers(X, Brother) :-
-    man(Brother),X\=Brother,dite(X,Parent),dite(Brother,Parent).
+brothers(X) :-
+    brother(Y, X), 
+    write(Y), 
+    nl.
