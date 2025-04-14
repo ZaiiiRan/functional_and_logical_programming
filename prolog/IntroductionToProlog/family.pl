@@ -62,3 +62,11 @@ b_s(X) :-
     b_s(X, Y),
     write(Y),
     nl.
+
+father(X, Y) :-
+    man(X), parent(X, Y).
+
+father(X) :-
+    father(Y, X),
+    write(Y),
+    nl.
