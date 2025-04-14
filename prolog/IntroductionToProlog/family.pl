@@ -50,9 +50,8 @@ brother(X, Y) :-
     X \= Y.
 
 brothers(X) :-
-    brother(Y, X), 
-    write(Y), 
-    nl, fail.
+    setof(Y, brother(Y, X), Brothers),
+    write(Brothers).
 
 b_s(X, Y) :-
     parent(P1, X), parent(P1, Y),
@@ -60,9 +59,8 @@ b_s(X, Y) :-
     X \= Y.
 
 b_s(X) :-
-    b_s(X, Y),
-    write(Y),
-    nl, fail.
+    setof(Y, b_s(Y, X), Siblings),
+    write(Siblings).
 
 father(X, Y) :-
     man(X), parent(X, Y).
@@ -79,9 +77,8 @@ sister(X, Y) :-
     X \= Y.
 
 sister(X) :-
-    sister(Y, X),
-    write(Y),
-    nl, fail.
+    setof(Y, sister(Y, X), Sisters),
+    write(Sisters).
 
 grand_pa(X, Y) :-
     man(X),
@@ -89,9 +86,8 @@ grand_pa(X, Y) :-
     parent(Parent, Y).
 
 grand_pas(X) :-
-    grand_pa(Grandpa, X),
-    write(Grandpa),
-    nl, fail.
+    setof(G, grand_pa(G, X), Grandpas),
+    write(Grandpas).
 
 grand_pa_and_son(X, Y) :-
     grand_pa(X, Y).
@@ -105,6 +101,5 @@ uncle(X, Y) :-
     X \= Parent.
 
 uncles(X) :-
-    uncle(Uncle, X),
-    write(Uncle),
-    nl, fail.
+    setof(U, uncle(U, X), Uncles),
+    write(Uncles).
