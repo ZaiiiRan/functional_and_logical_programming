@@ -92,4 +92,8 @@ grand_pas(X) :-
     grand_pa(Grandpa, X),
     write(Grandpa),
     nl, fail.
-grand_pas(_).
+
+grand_pa_and_son(X, Y) :-
+    grand_pa(X, Y).
+grand_pa_and_son(X, Y) :-
+    grand_pa(Y, X).
