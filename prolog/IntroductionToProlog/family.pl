@@ -82,3 +82,14 @@ sister(X) :-
     sister(Y, X),
     write(Y),
     nl, fail.
+
+grand_pa(X, Y) :-
+    man(X),
+    parent(X, Parent),
+    parent(Parent, Y).
+
+grand_pas(X) :-
+    grand_pa(Grandpa, X),
+    write(Grandpa),
+    nl, fail.
+grand_pas(_).
