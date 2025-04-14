@@ -97,3 +97,14 @@ grand_pa_and_son(X, Y) :-
     grand_pa(X, Y).
 grand_pa_and_son(X, Y) :-
     grand_pa(Y, X).
+
+uncle(X, Y) :-
+    man(X),
+    parent(Parent, Y),
+    b_s(X, Parent),
+    X \= Parent.
+
+uncles(X) :-
+    uncle(Uncle, X),
+    write(Uncle),
+    nl, fail.
