@@ -36,3 +36,9 @@ mother(X, Y) :-
 
 mother_of(X, Mother) :-
     dite(X, Mother),woman(Mother).
+
+brother(X, Y) :-
+    man(X),X\=Y,dite(X, Parent),dite(Y, Parent).
+
+brothers(X, Brother) :-
+    man(Brother),X\=Brother,dite(X,Parent),dite(Brother,Parent).
