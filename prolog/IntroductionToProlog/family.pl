@@ -8,18 +8,18 @@ woman(galya).
 woman(sveta).
 woman(zoya).
 woman(katrin).
-dite(dimitriy, anatoliy).
-dite(dimitriy, galya).
-dite(vladina, anatoliy).
-dite(vladina, galya).
-dite(kirill, dimitriy).
-dite(mefodiy, dimitriy).
-dite(kirill, sveta).
-dite(mefodiy, sveta).
-dite(zoya, vlad).
-dite(zoya, vladina).
-dite(katrin, vlad).
-dite(katrin, vladina).
+child(dimitriy, anatoliy).
+child(dimitriy, galya).
+child(vladina, anatoliy).
+child(vladina, galya).
+child(kirill, dimitriy).
+child(mefodiy, dimitriy).
+child(kirill, sveta).
+child(mefodiy, sveta).
+child(zoya, vlad).
+child(zoya, vladina).
+child(katrin, vlad).
+child(katrin, vladina).
 
 men(X) :- 
     man(X).
@@ -28,20 +28,21 @@ women(X) :-
     woman(X).
 
 children(X, Y, Z) :-
-    dite(Y, X),
-    dite(Z, Y).
+    child(Y, X),
+    child(Z, Y).
 
 mother(X, Y) :-
-    dite(Y, X), woman(X).
+    child(Y, X), woman(X).
 
 mother_of(X) :-
-    dite(X, Mother), 
+    child(X, Mother), 
     woman(Mother),
     write(Mother),
     nl, fail.
+mother_of(_).
 
 parent(X, Y) :-
-    dite(Y, X).
+    child(Y, X).
 
 brother(X, Y) :-
     man(X), 
@@ -69,6 +70,7 @@ father(X) :-
     father(Y, X),
     write(Y),
     nl, fail.
+father(_).
 
 sister(X, Y) :-
     woman(X),
