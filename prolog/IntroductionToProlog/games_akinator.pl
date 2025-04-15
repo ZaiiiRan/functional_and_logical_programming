@@ -123,3 +123,41 @@ story(god_of_war, 2).
 story(overwatch, 0).
 story(dark_souls_iii, 1).
 story(cyberpunk_2077, 2).
+
+question1(X1):- write("Is the game multiplayer?"),nl,
+                write("1. Yes"),nl,
+                write("0. No"),nl,
+                read(X1).
+
+question2(X2):- write("Is the game an action game?"),nl,
+                write("2. Pure action (e.g., shooters)"),nl,
+                write("1. Action with other elements (e.g., RPG, adventure)"),nl,
+                write("0. Not action (e.g., strategy, simulator)"),nl,
+                read(X2).
+
+question3(X3):- write("Is the game part of a series?"),nl,
+                write("2. Large series (many installments)"),nl,
+                write("1. Regular series (a few installments)"),nl,
+                write("0. Standalone game"),nl,
+                read(X3).
+
+question4(X4):- write("Was the game released after 2010?"),nl,
+                write("1. Yes"),nl,
+                write("0. No"),nl,
+                read(X4).
+
+question5(X5):- write("Does the game have an open world?"),nl,
+                write("2. Fully open world"),nl,
+                write("1. Partially open world"),nl,
+                write("0. Linear or restricted world"),nl,
+                read(X5).
+
+question6(X6):- write("Does the game have a strong story?"),nl,
+                write("2. Cinematic, deep story"),nl,
+                write("1. Moderate or subtle story"),nl,
+                write("0. Minimal or no story"),nl,
+                read(X6).
+
+start:-    question1(X1), question2(X2), question3(X3), question4(X4), question5(X5), question6(X6),
+        multiplayer(X, X1), action(X, X2), series(X, X3), modern(X, X4), openworld(X, X5), story(X, X6),
+        write("Your game is: "), write(X), nl.
