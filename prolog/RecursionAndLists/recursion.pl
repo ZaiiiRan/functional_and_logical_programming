@@ -141,7 +141,29 @@ sum_prime_divisors(N, D, Acc, Sum) :-
     D1 is D + 1,
     sum_prime_divisors(N, D1, Acc1, Sum).
 
-task5_1 :-
-    write('Введите число: '), read(N),
+task_5_1 :-
+    write('Введите число: '), nl,
+    read(N),
     sum_prime_divisors(N, Sum),
     write('Сумма простых делителей: '), write(Sum), nl.
+
+% product_selected_divisors(+N, ?Product)
+product_selected_divisors(N, Product) :-
+    digit_sum_down(N, DS),
+    product_selected_divisors(N, 1, DS, 1, Product).
+
+product_selected_divisors(N, D, _, Acc, Acc) :- D > N, !.
+product_selected_divisors(N, D, DS, Acc, Product) :-
+    (N mod D =:= 0,
+    digit_sum_up(D, SD),
+    SD < DS
+    -> Acc1 is Acc * D
+    ; Acc1 = Acc),
+    D1 is D + 1,
+    product_selected_divisors(N, D1, DS, Acc1, Product).
+
+task_5_2 :-
+    write('Введите число: '), nl,
+    read(N),
+    product_selected_divisors(N, Prod),
+    write('Произведение подходящих делителей: '), write(Prod), nl.
