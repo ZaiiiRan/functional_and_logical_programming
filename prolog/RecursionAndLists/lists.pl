@@ -158,3 +158,31 @@ print_smaller_indices :-
     read_list(L),
     find_smaller_indices(L, Indices),
     print_indices_and_count(Indices).
+
+prime_divisors(N, D, Acc, Acc) :- D > N, !.
+prime_divisors(N, D, Acc, List) :-
+    (N mod D =:= 0, is_prime(D) -> 
+        (in_list(Acc, D) -> Acc1 = Acc ; append(Acc, [D], Acc1))
+    ; Acc1 = Acc),
+    D1 is D + 1,
+    prime_divisors(N, D1, Acc1, List).
+
+% all_prime_divisors(+List, -Result)
+all_prime_divisors([], []).
+all_prime_divisors([H|T], Result) :-
+    all_prime_divisors(T, RTail),
+    prime_divisors(H, 2, [], D1),
+    my_union(D1, RTail, Result).
+
+% my_union(+List1, +List2, -Union) — объединение без повторений
+my_union([], L, L).
+my_union([H|T], L, R) :-
+    in_list(L, H), !,
+    my_union(T, L, R).
+my_union([H|T], L, [H|R]) :-
+    my_union(T, L, R).
+
+print_positive_prime_divisors :-
+    read_list(L),
+    all_prime_divisors(L, Result),
+    write('Простые делители: '), write(Result), nl.
