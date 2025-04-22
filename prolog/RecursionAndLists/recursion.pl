@@ -86,3 +86,27 @@ product_digits_up_(N, Product) :-
     N1 is N // 10,
     product_digits_up_(N1, P1),
     Product is P1 * D.
+
+% count_odd_gt3_down(+N, ?Count)
+count_odd_gt3_down(N, Count) :-
+    N1 is abs(N),
+    count_odd_gt3_tail(N1, 0, Count).
+
+count_odd_gt3_tail(0, Acc, Acc) :- !.
+count_odd_gt3_tail(N, Acc, Count) :-
+    D is N mod 10,
+    N1 is N // 10,
+    ( D mod 2 =:= 1, D > 3 -> Acc1 is Acc + 1 ; Acc1 is Acc ),
+    count_odd_gt3_tail(N1, Acc1, Count).
+
+% count_odd_gt3_up(+N, ?Count)
+count_odd_gt3_up(N, Count) :-
+    N1 is abs(N),
+    count_odd_gt3_up_(N1, Count).
+
+count_odd_gt3_up_(0, 0) :- !.
+count_odd_gt3_up_(N, Count) :-
+    D is N mod 10,
+    N1 is N // 10,
+    count_odd_gt3_up_(N1, C1),
+    ( D mod 2 =:= 1, D > 3 -> Count is C1 + 1 ; Count is C1 ).
