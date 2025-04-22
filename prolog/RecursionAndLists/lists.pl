@@ -57,3 +57,36 @@ remove_by_digit_sum([H|T], TargetSum, Acc, Result) :-
     remove_by_digit_sum(T, TargetSum, Acc, Result).
 remove_by_digit_sum([H|T], TargetSum, Acc, Result) :-
     remove_by_digit_sum(T, TargetSum, [H|Acc], Result).
+
+% read_list(-List)
+read_list(List) :- 
+    read(N), r_list(List, N).
+
+% count_after_last_max(+List, ?Count)
+count_after_last_max(List, Count) :-
+    max_in_list(List, Max),
+    last_index_of(List, Max, LastMaxIdx),
+    length(List, Len),
+    Count is Len - LastMaxIdx - 1.
+
+max_in_list([H|T], Max) :- max_in_list(T, H, Max).
+max_in_list([], Max, Max).
+max_in_list([H|T], CurMax, Max) :-
+    max(H, CurMax, NewMax),
+    max_in_list(T, NewMax, Max).
+
+last_index_of(List, Elem, Index) :- 
+    reverse(List, Rev),
+    index_of_first(Rev, Elem, RevIdx),
+    length(List, Len),
+    Index is Len - RevIdx - 1.
+
+index_of_first([Elem|_], Elem, 0) :- !.
+index_of_first([_|T], Elem, Index) :- 
+    index_of_first(T, Elem, Index1),
+    Index is Index1 + 1.
+
+print_after_last_max :-
+    read_list(List),
+    count_after_last_max(List, Count),
+    write(Count), nl.
