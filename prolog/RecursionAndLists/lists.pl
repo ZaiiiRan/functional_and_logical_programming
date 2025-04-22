@@ -135,3 +135,26 @@ print_max_in_range :-
     read(A), read(B),
     max_in_range(List, A, B, Max),
     write('Максимум в интервале: '), write(Max), nl.
+
+% find_smaller_indices(+List, -Indices)
+find_smaller_indices([_], []).
+find_smaller_indices([Prev, Curr | T], Indices) :-
+    find_smaller_indices([Prev, Curr | T], 2, [], Indices).
+
+% find_smaller_indices(+List, +Index, +Acc, -Result)
+find_smaller_indices([_, _], _, Acc, Acc) :- !.
+find_smaller_indices([Prev, Curr | T], I, Acc, Result) :-
+    (Curr < Prev -> append(Acc, [I], Acc1) ; Acc1 = Acc),
+    T = [Next | Rest],
+    I1 is I + 1,
+    find_smaller_indices([Curr, Next | Rest], I1, Acc1, Result).
+
+print_indices_and_count(Indices) :-
+    write('Индексы: '), write(Indices), nl,
+    length(Indices, Count),
+    write('Количество: '), write(Count), nl.
+
+print_smaller_indices :-
+    read_list(L),
+    find_smaller_indices(L, Indices),
+    print_indices_and_count(Indices).
