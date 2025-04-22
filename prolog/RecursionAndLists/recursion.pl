@@ -46,3 +46,19 @@ fact_tail(N, Acc, X) :-
     N1 is N - 1,
     NewAcc is Acc * N,
     fact_tail(N1, NewAcc, X).
+
+% square_free(+N)
+square_free(N) :-
+    N > 0,
+    Max is floor(sqrt(N)),
+    check_square_factors(2, Max, N).
+
+% check_square_factors(+K, +Max, +N)
+check_square_factors(K, Max, _) :-
+    K > Max, !.
+
+check_square_factors(K, Max, N) :-
+    Square is K * K,
+    N mod Square =\= 0,
+    K1 is K + 1,
+    check_square_factors(K1, Max, N).
