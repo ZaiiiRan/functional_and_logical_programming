@@ -116,3 +116,22 @@ print_move_before_min :-
     read_list(List),
     move_before_min_to_end(List, Result),
     write('Результат: '), write(Result), nl.
+
+% max_in_range(+List, +A, +B, ?Max)
+max_in_range(List, A, B, Max) :-
+    filter_range(List, A, B, Filtered),
+    max_in_list(Filtered, Max).
+
+filter_range([], _, _, []).
+filter_range([H|T], A, B, [H|R]) :-
+    H >= A, H =< B, !,
+    filter_range(T, A, B, R).
+filter_range([_|T], A, B, R) :-
+    filter_range(T, A, B, R).
+
+print_max_in_range :-
+    read_list(List),
+    write('Введите границы интервала A и B: '), nl,
+    read(A), read(B),
+    max_in_range(List, A, B, Max),
+    write('Максимум в интервале: '), write(Max), nl.
