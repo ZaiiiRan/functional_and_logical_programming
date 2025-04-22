@@ -60,7 +60,10 @@ remove_by_digit_sum([H|T], TargetSum, Acc, Result) :-
 
 % read_list(-List)
 read_list(List) :- 
-    read(N), r_list(List, N).
+    write('Введите число элементов списка: '), nl,
+    read(N),
+    write('Введите элементы списка: '), nl,
+    r_list(List, N).
 
 % count_after_last_max(+List, ?Count)
 count_after_last_max(List, Count) :-
@@ -89,4 +92,27 @@ index_of_first([_|T], Elem, Index) :-
 print_after_last_max :-
     read_list(List),
     count_after_last_max(List, Count),
-    write(Count), nl.
+    write('Количество элементов после последнего максимального: '), write(Count), nl.
+
+% move_before_min_to_end(+List, ?Result)
+move_before_min_to_end(List, Result) :-
+    min_in_list(List, Min),
+    index_of_first(List, Min, MinIdx),
+    split_at(List, MinIdx, Before, After),
+    my_append(After, Before, Result).
+
+min_in_list([H|T], Min) :- min_in_list(T, H, Min).
+min_in_list([], Min, Min).
+min_in_list([H|T], CurMin, Min) :-
+    (H < CurMin -> NewMin = H ; NewMin = CurMin),
+    min_in_list(T, NewMin, Min).
+
+split_at(List, 0, [], List) :- !.
+split_at([H|T], N, [H|B], A) :-
+    N1 is N - 1,
+    split_at(T, N1, B, A).
+
+print_move_before_min :-
+    read_list(List),
+    move_before_min_to_end(List, Result),
+    write('Результат: '), write(Result), nl.
