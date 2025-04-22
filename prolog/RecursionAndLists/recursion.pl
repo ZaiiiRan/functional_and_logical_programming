@@ -62,3 +62,27 @@ check_square_factors(K, Max, N) :-
     N mod Square =\= 0,
     K1 is K + 1,
     check_square_factors(K1, Max, N).
+
+% product_digits_down(+N, ?Product)
+product_digits_down(N, Product) :-
+    N1 is abs(N),
+    product_digits_tail(N1, 1, Product).
+
+% product_digits_tail(+N, +Acc, ?Product)
+product_digits_tail(0, Acc, Acc) :- !.
+product_digits_tail(N, Acc, Product) :-
+    D is N mod 10,
+    N1 is N // 10,
+    Acc1 is Acc * D,
+    product_digits_tail(N1, Acc1, Product).
+
+% product_digits_up(+N, ?Product)
+product_digits_up(N, Product) :-
+    N1 is abs(N),
+    product_digits_up_(N1, Product).
+product_digits_up_(0, 1) :- !.
+product_digits_up_(N, Product) :-
+    D is N mod 10,
+    N1 is N // 10,
+    product_digits_up_(N1, P1),
+    Product is P1 * D.
