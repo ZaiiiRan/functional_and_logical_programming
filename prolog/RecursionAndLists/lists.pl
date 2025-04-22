@@ -34,3 +34,26 @@ pr_calc_sum_of_list :-
     sum_list_down(A, S),
     write(S), nl.
 
+% digit_sum(+N, ?Sum)
+digit_sum(N, Sum) :-
+    N1 is abs(N),
+    digit_sum(N1, 0, Sum). 
+digit_sum(0, Acc, Acc) :- !.
+digit_sum(N, Acc, Sum) :-
+    D is N mod 10,
+    N1 is N // 10,
+    Acc1 is Acc + D,
+    digit_sum(N1, Acc1, Sum).
+
+% remove_by_digit_sum(+List, +TargetSum, ?Result)
+remove_by_digit_sum(List, TargetSum, Result) :-
+    remove_by_digit_sum(List, TargetSum, [], ResultRev),
+    reverse(ResultRev, Result).
+
+remove_by_digit_sum([], _, Acc, Acc) :- !.
+remove_by_digit_sum([H|T], TargetSum, Acc, Result) :-
+    digit_sum(H, DS),
+    DS =:= TargetSum, !,
+    remove_by_digit_sum(T, TargetSum, Acc, Result).
+remove_by_digit_sum([H|T], TargetSum, Acc, Result) :-
+    remove_by_digit_sum(T, TargetSum, [H|Acc], Result).
