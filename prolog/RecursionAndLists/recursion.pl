@@ -110,3 +110,14 @@ count_odd_gt3_up_(N, Count) :-
     N1 is N // 10,
     count_odd_gt3_up_(N1, C1),
     ( D mod 2 =:= 1, D > 3 -> Count is C1 + 1 ; Count is C1 ).
+
+% gcd_down(+A, +B, ?GCD)
+gcd_down(A, B, GCD) :-
+    A1 is abs(A),
+    B1 is abs(B),
+    gcd_tail(A1, B1, GCD).
+
+gcd_tail(A, 0, A) :- !.
+gcd_tail(A, B, GCD) :-
+    R is A mod B,
+    gcd_tail(B, R, GCD).
