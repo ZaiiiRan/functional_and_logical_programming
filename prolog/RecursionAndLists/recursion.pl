@@ -121,3 +121,27 @@ gcd_tail(A, 0, A) :- !.
 gcd_tail(A, B, GCD) :-
     R is A mod B,
     gcd_tail(B, R, GCD).
+
+% is_prime(+N)
+is_prime(2) :- !.
+is_prime(N) :- N > 2, not(has_divisor(N, 2)).
+
+% has_divisor(+N, ?D)
+has_divisor(N, D) :-
+    D * D =< N,
+    (N mod D =:= 0 ; D1 is D + 1, has_divisor(N, D1)).
+
+% sum_prime_divisors(+N, ?Sum)
+sum_prime_divisors(N, Sum) :-
+    sum_prime_divisors(N, 2, 0, Sum).
+
+sum_prime_divisors(N, D, Acc, Acc) :- D > N, !.
+sum_prime_divisors(N, D, Acc, Sum) :-
+    (N mod D =:= 0, is_prime(D) -> Acc1 is Acc + D ; Acc1 = Acc),
+    D1 is D + 1,
+    sum_prime_divisors(N, D1, Acc1, Sum).
+
+task5_1 :-
+    write('Введите число: '), read(N),
+    sum_prime_divisors(N, Sum),
+    write('Сумма простых делителей: '), write(Sum), nl.
