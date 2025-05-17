@@ -8,28 +8,28 @@ let index x y = y * size + x
 
 // Генерация последовательности (таблицы) по условию
 let generateSequence () =
-    let rec generateFirst55 k acc =
-        match k > 55L with
-        | true -> List.rev acc
-        | _ ->
-            let term = (100003L - 200003L * k + 300007L * k * k * k) % 1000000L - 500000L
-            generateFirst55 (k + 1L) ((int term) :: acc)
-    
-    let first55 = generateFirst55 1L [] |> List.toArray
-    
-    let totalElements = size * size
-    let sequence = Array.zeroCreate<int> totalElements
-    Array.blit first55 0 sequence 0 (min 55 totalElements)
-    
-    let rec fillRest k =
-        match k >= totalElements with
-        | true -> ()
-        | _ -> 
-            sequence.[k] <- (sequence[k-24] + sequence[k-55] + 1000000) % 1000000 - 500000
-            fillRest (k + 1)
-    
-    if totalElements > 55 then fillRest 55
-    sequence
+    let rec generator (acc: Map<int, int>) k =
+        seq {
+            match k >= size * size with
+            | true -> ()
+            | false ->
+                let next =
+                    match k < 55 with
+                    | true ->
+                        let kL = int64 (k + 1)
+                        int ((100003L - 200003L * kL + 300007L * kL * kL * kL) % 1000000L - 500000L)
+                    | _ ->
+                        let a = acc.[k - 24]
+                        let b = acc.[k - 55]
+                        (a + b + 1000000) % 1000000 - 500000
+                yield next
+                let newAcc = acc.Add(k, next)
+                yield! generator newAcc (k + 1)
+        }
+
+    generator Map.empty 0
+    |> Seq.take (size * size)
+    |> Seq.toArray
 
 // Алгоритм Каданы для поиска максимальной суммы элементов в подмассивах в массиве
 let maxSum (data: int[]) first last increment =
