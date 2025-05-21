@@ -56,10 +56,16 @@ sink(super_sink).
 
 % Начальное заполнение остаточной сети
 init_residual :- 
-    forall(edge(X, Y, C), (
-        assertz(residual(X, Y, C)),
-        assertz(residual(Y, X, 0))  % обратное ребро
-    )).
+    process_init_residual_edges.
+
+process_init_residual_edges :-
+    edge(X, Y, C),
+    \+ residual(X, Y, _), % дважды одни и те же ребра не добавляем
+    assertz(residual(X, Y, C)),
+    assertz(residual(Y, X, 0)),
+    fail.
+process_init_residual_edges.
+
 
 % BFS поиск увеличивающего пути
 bfs(Path, MinCap) :-
@@ -72,14 +78,13 @@ bfs_visit([(T, Path, Min)|_], _, T, [(T, Min)|Path], Min).
 bfs_visit([(U, Path, Min)|Queue], Visited, T, ResultPath, MinCap) :-
     \+ member(U, Visited),
     findall(
-        (V, [(U, Min1)|Path], NewMin),
+        (V, [(U, Min)|Path], NewMin),
         (
             residual(U, V, C),
             C > 0,
             NewMin is min(Min, C),
             \+ member(V, Visited),
-            \+ member((V, _, _), Queue),
-            Min1 = NewMin
+            \+ member((V, _, _), Queue)
         ),
         Neighbors
     ),
