@@ -1,6 +1,10 @@
+infinite_capacity(100000000000000000).
+
 % Пример 1 (10)
-% edge(super_source, a, 1000000).
-% edge(super_source, b, 1000000).
+% edge(super_source, a, C) :- infinite_capacity(C).
+% edge(super_source, b, C) :- infinite_capacity(C).
+% edge(f, super_sink, C) :- infinite_capacity(C).
+% edge(g, super_sink, C) :- infinite_capacity(C).
 % edge(a, b, 7).
 % edge(a, c, 4).
 % edge(b, c, 4).
@@ -10,33 +14,31 @@
 % edge(e, d, 4).
 % edge(e, f, 5).
 % edge(d, f, 12).
-% edge(f, super_sink, 1000000).
-% edge(g, super_sink, 1000000).
 
 % Пример 2 (100)
-% edge(super_source, a, 1000000).
+% edge(super_source, a, C) :- infinite_capacity(C).
+% edge(b, super_sink, C) :- infinite_capacity(C).
 % edge(a, b, 100).
 % edge(b, a, 1000).
-% edge(b, super_sink, 1000000).
 
 
 % Пример 3 (3)
-% edge(super_source, a, 1000000).
+% edge(super_source, a, C) :- infinite_capacity(C).
+% edge(d, super_sink, C) :- infinite_capacity(C).
 % edge(a, b, 2).
 % edge(a, c, 1).
 % edge(b, c, 1).
 % edge(b, d, 2).
 % edge(c, b, 1).
 % edge(c, d, 1).
-% edge(d, super_sink, 1000000).
 
 % Пример 4 (141)
-edge(super_source, 2, 1000000).
-edge(super_source, 4, 1000000).
+edge(super_source, 2, C) :- infinite_capacity(C).
+edge(super_source, 4, C) :- infinite_capacity(C).
 
-edge(5, super_sink, 1000000).
-edge(6, super_sink, 1000000).
-edge(8, super_sink, 1000000).
+edge(5, super_sink, C) :- infinite_capacity(C).
+edge(6, super_sink, C) :- infinite_capacity(C).
+edge(8, super_sink, C) :- infinite_capacity(C).
 
 edge(0, 1, 100).
 edge(0, 5, 1).
